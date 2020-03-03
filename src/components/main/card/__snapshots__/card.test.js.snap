@@ -91,7 +91,9 @@ exports[`<Card /> render 1`] = `
     >
       <a
         href="#"
-      />
+      >
+        Test title
+      </a>
     </h2>
     <p
       className="place-card__type"

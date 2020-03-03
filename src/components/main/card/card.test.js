@@ -4,9 +4,9 @@ import Card from "./card";
 
 const testData = `Test title`;
 
-it (`<Card /> render`, () => {
+it(`<Card /> render`, () => {
   const tree = renderer.create(<Card
-    testData={testData}
+    dataTitle={testData}
   />).toJSON();
 
   expect(tree).toMatchSnapshot();
