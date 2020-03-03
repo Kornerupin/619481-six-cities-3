@@ -2,10 +2,10 @@ import React from "react";
 import Main from "../main/main";
 import PropTypes from "prop-types";
 
-const App = (props) => {
+const App = ({placesCount, titles}) => {
   return <Main
-    placesCount={props.placesCount}
-    titles={props.titles}
+    placesCount={placesCount}
+    titles={titles}
   />;
 };
 
