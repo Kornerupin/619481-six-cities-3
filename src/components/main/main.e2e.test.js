@@ -18,11 +18,9 @@ it(`Should title be clicked`, () => {
       <Main titles={testData} handler={handler}/>
   );
 
-  const elem = main.find(`.place-card__name`).get(0);
-
   main.find(`.place-card__name`).forEach((node) => {
     node.simulate(`click`);
   });
 
-  expect(elem.props.onClick.mock.calls.length).toBe(testData.length);
+  expect(handler.mock.calls.length).toBe(testData.length);
 });
