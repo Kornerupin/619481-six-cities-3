@@ -1,11 +1,15 @@
 import React from "react";
 import Main from "../main/main";
+import PropTypes from "prop-types";
 
-const App = (props) => {
+const App = ({titles}) => {
   return <Main
-    // eslint-disable-next-line react/prop-types
-    placesCount={props.placesCount}
+    titles={titles}
   />;
+};
+
+App.propTypes = {
+  titles: PropTypes.array.isRequired
 };
 
 export default App;
