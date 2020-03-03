@@ -2,7 +2,7 @@ import React from "react";
 import Card from "./card/card";
 import PropTypes from "prop-types";
 
-const Main = ({titles}) => {
+const Main = ({titles, handler}) => {
 
   return <React.Fragment>
     <div style={{display: `none`}}>
@@ -105,7 +105,7 @@ const Main = ({titles}) => {
               </form>
               <div className="cities__places-list places__list tabs__content">
 
-                {titles.map((dataTitle, i) => <Card key={dataTitle + i} dataTitle={dataTitle} />)}
+                {titles.map((dataTitle, i) => <Card key={dataTitle + i} dataTitle={dataTitle} handler={handler} />)}
 
               </div>
             </section>
@@ -120,7 +120,8 @@ const Main = ({titles}) => {
 };
 
 Main.propTypes = {
-  titles: PropTypes.array.isRequired
+  titles: PropTypes.array.isRequired,
+  handler: PropTypes.func
 };
 
 export default Main;
