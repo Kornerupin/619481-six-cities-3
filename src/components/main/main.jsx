@@ -120,7 +120,7 @@ const Main = (props) => {
   </React.Fragment>;
 };
 
-Main.PropTypes = {
+Main.propTypes = {
   placesCount: PropTypes.string.isRequired,
   titles: PropTypes.array.isRequired
 };

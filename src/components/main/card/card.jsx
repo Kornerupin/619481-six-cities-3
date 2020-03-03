@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-const Card = (props) => {
+const Card = ({dataTitle}) => {
   return (<article className="cities__place-card place-card">
     <div className="place-card__mark">
       <span>Premium</span>
@@ -32,14 +32,14 @@ const Card = (props) => {
         </div>
       </div>
       <h2 className="place-card__name">
-        <a href="#">{props.dataTitle}</a>
+        <a href="#">{dataTitle}</a>
       </h2>
       <p className="place-card__type">Apartment</p>
     </div>
   </article>);
 };
 
-Card.PropTypes = {
+Card.propTypes = {
   dataTitle: PropTypes.string
 };
 

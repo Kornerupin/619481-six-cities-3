@@ -9,7 +9,7 @@ const App = (props) => {
   />;
 };
 
-App.PropTypes = {
+App.propTypes = {
   placesCount: PropTypes.integer.isRequired,
   titles: PropTypes.array.isRequired
 };
