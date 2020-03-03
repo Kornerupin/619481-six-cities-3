@@ -12,7 +12,6 @@ const titles = [
 
 ReactDOM.render(
     <App
-      placesCount={329}
       titles={titles}
     />,
     rootNode
