@@ -24,5 +24,5 @@ it(`Should title be clicked`, () => {
     node.simulate(`click`);
   });
 
-  expect(elem.props.onClick.mock.calls.length).toBe(2);
+  expect(elem.props.onClick.mock.calls.length).toBe(testData.length);
 });
