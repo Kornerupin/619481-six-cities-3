@@ -10,7 +10,7 @@ const App = (props) => {
 };
 
 App.propTypes = {
-  placesCount: PropTypes.integer.isRequired,
+  placesCount: PropTypes.number.isRequired,
   titles: PropTypes.array.isRequired
 };
 

@@ -121,7 +121,7 @@ const Main = (props) => {
 };
 
 Main.propTypes = {
-  placesCount: PropTypes.string.isRequired,
+  placesCount: PropTypes.number.isRequired,
   titles: PropTypes.array.isRequired
 };
 
