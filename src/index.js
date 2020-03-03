@@ -6,7 +6,7 @@ const rootNode = document.querySelector(`#root`);
 
 ReactDOM.render(
     <App
-      placesCount = {318}
+      placesCount={329}
     />,
     rootNode
 );
