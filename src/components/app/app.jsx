@@ -2,14 +2,14 @@ import React from "react";
 import Main from "../main/main";
 import PropTypes from "prop-types";
 
-const App = ({titles}) => {
+const App = ({offers}) => {
   return <Main
-    titles={titles}
+    offers={offers}
   />;
 };
 
 App.propTypes = {
-  titles: PropTypes.array.isRequired
+  offers: PropTypes.array.isRequired
 };
 
 export default App;
