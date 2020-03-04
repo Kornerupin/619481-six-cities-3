@@ -1,8 +1,9 @@
 import React from "react";
-import Card from "./card/card";
+import Offers from "./offers/offers";
 import PropTypes from "prop-types";
+import card from "../../propTypes/card";
 
-const Main = ({titles, handler}) => {
+const Main = ({offers, onHover}) => {
 
   return <React.Fragment>
     <div style={{display: `none`}}>
@@ -87,7 +88,7 @@ const Main = ({titles, handler}) => {
           <div className="cities__places-container container">
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
-              <b className="places__found">{titles.length} places to stay in Amsterdam</b>
+              <b className="places__found">{offers.length} places to stay in Amsterdam</b>
               <form className="places__sorting" action="#" method="get">
                 <span className="places__sorting-caption">Sort by</span>
                 <span className="places__sorting-type" tabIndex="0">
@@ -105,7 +106,7 @@ const Main = ({titles, handler}) => {
               </form>
               <div className="cities__places-list places__list tabs__content">
 
-                {titles.map((dataTitle, i) => <Card key={dataTitle + i} dataTitle={dataTitle} handler={handler} />)}
+                <Offers offers={offers} onHover={onHover} />
 
               </div>
             </section>
@@ -120,8 +121,8 @@ const Main = ({titles, handler}) => {
 };
 
 Main.propTypes = {
-  titles: PropTypes.array.isRequired,
-  handler: PropTypes.func
+  offers: PropTypes.arrayOf(card).isRequired,
+  onHover: PropTypes.func
 };
 
 export default Main;
