@@ -17,7 +17,7 @@ class Offers extends PureComponent {
       <React.Fragment>
         {
           this.props.offers.map((offerData) =>
-            <Card key={offerData.id} keyNew={offerData.id} offerData={offerData} onHover={this._handlerCardClick.bind(this, offerData.id)}/>
+            <Card key={offerData.id} offerData={offerData} onHover={this._handlerCardClick.bind(this, offerData.id)}/>
           )
         }
       </React.Fragment>
