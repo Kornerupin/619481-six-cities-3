@@ -1,5 +1,6 @@
 export default [
   {
+    id: 1050,
     mark: `Premium`,
     img: {
       imgLink: `apartment-01.jpg`,
@@ -7,14 +8,15 @@ export default [
     },
     link: `#`,
     price: {
-      priceValue: `&euro;120`,
-      priceText: `&#47;&nbsp;night`,
+      priceValue: `€120`,
+      priceText: `/ night`,
     },
     rating: 4,
     title: `Beautiful & luxurious apartment at great location`,
     type: `Apartment`,
   },
   {
+    id: 1051,
     mark: ``,
     img: {
       imgLink: `room.jpg`,
@@ -22,29 +24,31 @@ export default [
     },
     link: `#`,
     price: {
-      priceValue: `&euro;80`,
-      priceText: `&#47;&nbsp;night`,
+      priceValue: `€80`,
+      priceText: `/ night`,
     },
     rating: 5,
     title: `Wood and stone place`,
     type: `Private room`,
   },
   {
+    id: 1052,
     mark: ``,
     img: {
       imgLink: `apartment-02.jpg`,
-      imgAlt: false,
+      imgAlt: ``,
     },
     link: `#`,
     price: {
-      priceValue: `&euro;132`,
-      priceText: `&#47;&nbsp;night`,
+      priceValue: `€132`,
+      priceText: `/ night`,
     },
     rating: 1,
     title: `Canal View Prinsengracht`,
     type: `Apartment`,
   },
   {
+    id: 1053,
     mark: `Premium`,
     img: {
       imgLink: `apartment-03.jpg`,
@@ -52,8 +56,8 @@ export default [
     },
     link: `#`,
     price: {
-      priceValue: `&euro;180`,
-      priceText: `&#47;&nbsp;night`,
+      priceValue: `€180`,
+      priceText: `/ night`,
     },
     rating: 3,
     title: `Nice, cozy, warm big bed apartment`,

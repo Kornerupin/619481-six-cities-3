@@ -1,6 +1,7 @@
 import React from "react";
-import CardsList from "./cardsList/cardsList";
+import Offers from "./offers/offers";
 import PropTypes from "prop-types";
+import card from "../../propTypes/card";
 
 const Main = ({offers, onHover}) => {
 
@@ -105,7 +106,7 @@ const Main = ({offers, onHover}) => {
               </form>
               <div className="cities__places-list places__list tabs__content">
 
-                {<CardsList cardsList={offers} onHover={onHover} />}
+                <Offers offers={offers} onHover={onHover} />
 
               </div>
             </section>
@@ -120,7 +121,7 @@ const Main = ({offers, onHover}) => {
 };
 
 Main.propTypes = {
-  offers: PropTypes.array.isRequired,
+  offers: PropTypes.arrayOf(card).isRequired,
   onHover: PropTypes.func
 };
 
