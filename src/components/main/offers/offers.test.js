@@ -1,6 +1,6 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import App from "./app";
+import Offers from "./offers";
 
 const testData = [
   {
@@ -21,9 +21,11 @@ const testData = [
   }
 ];
 
-it(`<App /> component render test`, () => {
+it(`<Offers /> component render test`, () => {
   const tree = renderer.
-    create(<App offers={testData}/>).toJSON();
+    create(<Offers
+      offers={testData}
+    />).toJSON();
 
   expect(tree).toMatchSnapshot();
 });

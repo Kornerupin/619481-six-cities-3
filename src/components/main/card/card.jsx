@@ -2,8 +2,8 @@ import React from "react";
 import PropTypes from "prop-types";
 import card from "../../../propTypes/card";
 
-const Card = ({offerData, number, onHover}) => {
-  return (<article className="cities__place-card place-card" onMouseOver={onHover} data-number={number}>
+const Card = ({offerData, onHover}) => {
+  return (<article className="cities__place-card place-card" onMouseOver={onHover}>
     {
       offerData.mark ? (
         <div className="place-card__mark">

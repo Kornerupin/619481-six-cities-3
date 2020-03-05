@@ -25,7 +25,12 @@ class Offers extends PureComponent {
   }
 
   _handlerCardClick(id) {
-    this.state.activeCard = id;
+    this.setState({
+      activeCard: id,
+    });
+    if (this.props.onHover) {
+      this.props.onHover();
+    }
   }
 }
 

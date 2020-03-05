@@ -3,7 +3,9 @@ import Offers from "./offers/offers";
 import PropTypes from "prop-types";
 import card from "../../propTypes/card";
 
-const Main = ({offers, onHover}) => {
+const Main = ({offers, onHover = () => {
+  return false;
+}}) => {
 
   return <React.Fragment>
     <div style={{display: `none`}}>
