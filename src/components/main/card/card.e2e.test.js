@@ -9,6 +9,7 @@ Enzyme.configure({
 
 it(`Should state get current data if article hovered`, () => {
   const handler = jest.fn();
+
   const testData = {
     id: 34,
     mark: `Premium`,
@@ -32,5 +33,6 @@ it(`Should state get current data if article hovered`, () => {
 
   cardNode.simulate(`mouseover`);
 
+  expect(handler.mock.calls[0][0]).toBe(testData.id);
   expect(handler.mock.calls.length).toBe(1);
 });

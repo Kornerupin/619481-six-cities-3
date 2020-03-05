@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import card from "../../../propTypes/card";
 
 const Card = ({offerData, onHover}) => {
-  return (<article className="cities__place-card place-card" onMouseOver={onHover}>
+  return (<article className="cities__place-card place-card" onMouseOver={() => onHover(offerData.id)}>
     {
       offerData.mark ? (
         <div className="place-card__mark">
