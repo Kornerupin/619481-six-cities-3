@@ -3,16 +3,28 @@ import renderer from "react-test-renderer";
 import Main from "./main";
 
 const testData = [
-  `Test title 0`,
-  `Test title 1`,
-  `Test title 2`,
-  `Test title 3`
+  {
+    id: 34,
+    mark: `Premium`,
+    img: {
+      imgLink: `apartment-01.jpg`,
+      imgAlt: `title 0`,
+    },
+    link: `#`,
+    price: {
+      priceValue: `€120`,
+      priceText: `/ night`,
+    },
+    rating: 4,
+    title: `Beautiful & luxurious apartment at great location`,
+    type: `Apartment`,
+  }
 ];
 
 it(`<Main /> component render test`, () => {
   const tree = renderer.
     create(<Main
-      titles={testData}
+      offers={testData}
     />).toJSON();
 
   expect(tree).toMatchSnapshot();

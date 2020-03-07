@@ -7,19 +7,49 @@ Enzyme.configure({
   adapter: new Adapter(),
 });
 
-it(`Should title be clicked`, () => {
+it(`Should article be hovered`, () => {
   const handler = jest.fn();
   const testData = [
-    `Test title 0`,
-    `Test title 1`
+    {
+      id: 34,
+      mark: `Premium`,
+      img: {
+        imgLink: `apartment-01.jpg`,
+        imgAlt: `title 0`,
+      },
+      link: `#`,
+      price: {
+        priceValue: `€120`,
+        priceText: `/ night`,
+      },
+      rating: 4,
+      title: `Beautiful & luxurious apartment at great location`,
+      type: `Apartment`,
+    },
+    {
+      id: 35,
+      mark: `Premium`,
+      img: {
+        imgLink: `apartment-01.jpg`,
+        imgAlt: `title 0`,
+      },
+      link: `#`,
+      price: {
+        priceValue: `€120`,
+        priceText: `/ night`,
+      },
+      rating: 4,
+      title: `Beautiful & luxurious apartment at great location`,
+      type: `Apartment`,
+    }
   ];
 
   const main = mount(
-      <Main titles={testData} handler={handler}/>
+      <Main offers={testData} onHover={(handler)}/>
   );
 
-  main.find(`.place-card__name`).forEach((node) => {
-    node.simulate(`click`);
+  main.find(`.place-card`).forEach((node) => {
+    node.simulate(`mouseover`);
   });
 
   expect(handler.mock.calls.length).toBe(testData.length);
