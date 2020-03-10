@@ -1,6 +1,6 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import App from "./app";
+import CustomMap from "./customMap";
 
 const testData = [
   {
@@ -22,9 +22,11 @@ const testData = [
   }
 ];
 
-it(`<App /> component render test`, () => {
+it(`<CustomMap /> component render test`, () => {
   const tree = renderer.
-    create(<App offers={testData}/>).toJSON();
+    create(<CustomMap
+      offers={testData}
+    />).parseJSON;
 
   expect(tree).toMatchSnapshot();
 });

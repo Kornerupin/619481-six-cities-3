@@ -2,6 +2,7 @@ export default [
   {
     id: 1050,
     mark: `Premium`,
+    coords: [52.3909553943508, 4.85309666406198],
     img: {
       imgLink: `apartment-01.jpg`,
       imgAlt: `title 0`,
@@ -18,6 +19,7 @@ export default [
   {
     id: 1051,
     mark: ``,
+    coords: [52.369553943508, 4.85309666406198],
     img: {
       imgLink: `room.jpg`,
       imgAlt: `title 1`,
@@ -34,6 +36,7 @@ export default [
   {
     id: 1052,
     mark: ``,
+    coords: [52.3909553943508, 4.929309666406198],
     img: {
       imgLink: `apartment-02.jpg`,
       imgAlt: ``,
@@ -50,6 +53,7 @@ export default [
   {
     id: 1053,
     mark: `Premium`,
+    coords: [52.3809553943508, 4.939309666406198],
     img: {
       imgLink: `apartment-03.jpg`,
       imgAlt: `title 3`,

@@ -6,6 +6,7 @@ const testData = [
   {
     id: 34,
     mark: `Premium`,
+    coords: [52.369553943508, 4.85309666406198],
     img: {
       imgLink: `apartment-01.jpg`,
       imgAlt: `title 0`,
