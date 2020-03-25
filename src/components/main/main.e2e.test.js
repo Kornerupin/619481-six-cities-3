@@ -13,6 +13,7 @@ it(`Should article be hovered`, () => {
     {
       id: 34,
       mark: `Premium`,
+      coords: [52.3909553943508, 4.85309666406198],
       img: {
         imgLink: `apartment-01.jpg`,
         imgAlt: `title 0`,
@@ -29,6 +30,7 @@ it(`Should article be hovered`, () => {
     {
       id: 35,
       mark: `Premium`,
+      coords: [52.3909553943508, 4.85309666406198],
       img: {
         imgLink: `apartment-01.jpg`,
         imgAlt: `title 0`,

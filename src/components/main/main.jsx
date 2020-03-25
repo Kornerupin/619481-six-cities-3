@@ -2,10 +2,9 @@ import React from "react";
 import Offers from "./offers/offers";
 import PropTypes from "prop-types";
 import card from "../../propTypes/card";
+import {default as Map} from "../customMap/customMap";
 
-const Main = ({offers, onHover = () => {
-  return false;
-}}) => {
+const Main = ({offers, onHover}) => {
 
   return <React.Fragment>
     <div style={{display: `none`}}>
@@ -107,13 +106,13 @@ const Main = ({offers, onHover = () => {
                 </ul>
               </form>
               <div className="cities__places-list places__list tabs__content">
-
-                <Offers offers={offers} onHover={onHover} />
-
+                <section className="cities__map map">
+                  <Offers offers={offers} onHover={onHover} />
+                </section>
               </div>
             </section>
             <div className="cities__right-section">
-              <section className="cities__map map"></section>
+              <Map offers={offers}/>
             </div>
           </div>
         </div>
