@@ -106,9 +106,9 @@ const Main = ({offers, onHover}) => {
                 </ul>
               </form>
               <div className="cities__places-list places__list tabs__content">
-
-                <Offers offers={offers} onHover={onHover} />
-
+                <section className="cities__map map">
+                  <Offers offers={offers} onHover={onHover} />
+                </section>
               </div>
             </section>
             <div className="cities__right-section">

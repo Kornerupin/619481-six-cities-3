@@ -28,6 +28,9 @@ class CustomMap extends PureComponent {
       });
       this.offers.map((offer) => {
         pins.push(offer.coords);
+        leaflet
+          .marker(offer.coords, {icon})
+          .addTo(this.map);
       });
       this.map.setView(city, zoom);
       leaflet
@@ -35,19 +38,11 @@ class CustomMap extends PureComponent {
           attribution: `&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>`
         })
         .addTo(this.map);
-      const offerCords = [52.3709553943508, 4.89309666406198];
-      leaflet
-        .marker(offerCords, {icon})
-        .addTo(this.map);
     }
   }
 
   render() {
-    return <section className="cities__map map">
-      <div id="map">
-
-      </div>
-    </section>;
+    return <div className="cities__map map" id="map" ref={this.mapBlock}></div>;
   }
 }
 
