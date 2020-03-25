@@ -22,11 +22,12 @@ const testData = [
   }
 ];
 
-it(`<CustomMap /> component render test`, () => {
-  const tree = renderer.
-    create(<CustomMap
-      offers={testData}
-    />).parseJSON;
+describe(`<CustomMap /> component tests`, () => {
 
-  expect(tree).toMatchSnapshot();
+  it(`Render test`, () => {
+    const tree = renderer.
+      create(<CustomMap offers={testData} />).parseJSON;
+
+    expect(tree).toMatchSnapshot();
+  });
 });
