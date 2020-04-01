@@ -1,7 +1,8 @@
 import PropTypes from "prop-types";
 
-const card = PropTypes.exact({
+export const card = PropTypes.exact({
   id: PropTypes.number.isRequired,
+  townId: PropTypes.number.isRequired,
   mark: PropTypes.string.isRequired,
   coords: PropTypes.arrayOf(PropTypes.number).isRequired,
   img: PropTypes.exact({
@@ -17,5 +18,3 @@ const card = PropTypes.exact({
   title: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
 });
-
-export default card;

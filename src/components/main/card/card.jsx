@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import card from "../../../propTypes/card";
+import {card} from "../../../propTypes/card";
 
 const Card = ({offerData, onHover}) => {
   return (<article className="cities__place-card place-card" onMouseOver={() => onHover(offerData.id)}>
@@ -49,5 +49,6 @@ Card.propTypes = {
   onHover: PropTypes.func,
   number: PropTypes.number
 };
+
 
 export default Card;

@@ -1,12 +1,13 @@
 import React, {createRef, PureComponent} from "react";
 import PropTypes from "prop-types";
 import leaflet from "leaflet";
+import {town} from "../../propTypes/town";
 
 class CustomMap extends PureComponent {
   constructor(props) {
     super();
 
-    this.offers = props.offers;
+    this.props = props;
     this.map = null;
     this.mapBlock = createRef();
   }
@@ -14,25 +15,24 @@ class CustomMap extends PureComponent {
   componentDidMount() {
     if (this.mapBlock.current) {
       const pins = [];
-      const city = [52.38333, 4.9];
+
       const icon = leaflet.icon({
         iconUrl: `img/pin.svg`,
         iconSize: [30, 30]
       });
-      const zoom = 12;
       this.map = leaflet.map(this.mapBlock.current, {
-        center: city,
-        zoom,
+        center: this.props.town.center,
+        zoom: this.props.town.zoom,
         zoomControl: false,
         marker: true
       });
-      this.offers.map((offer) => {
+      this.props.offers.map((offer) => {
         pins.push(offer.coords);
         leaflet
           .marker(offer.coords, {icon})
           .addTo(this.map);
       });
-      this.map.setView(city, zoom);
+      this.map.setView(this.props.town.center, this.props.town.zoom);
       leaflet
         .tileLayer(`https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png`, {
           attribution: `&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>`
@@ -42,12 +42,13 @@ class CustomMap extends PureComponent {
   }
 
   render() {
-    return <div className="cities__map map" id="map" ref={this.mapBlock}></div>;
+    return <section className="cities__map map" id="map" ref={this.mapBlock}></section>;
   }
 }
 
 CustomMap.propTypes = {
   offers: PropTypes.array,
+  town: town,
 };
 
 export default CustomMap;

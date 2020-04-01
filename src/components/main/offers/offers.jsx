@@ -1,15 +1,13 @@
 import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
 import Card from "../card/card";
-import card from "../../../propTypes/card";
+import {card} from "../../../propTypes/card";
+import {ActionTypes} from "../../../reducer";
+import {connect} from "react-redux";
 
 class Offers extends PureComponent {
   constructor(props) {
     super(props);
-    this.state = {
-      activeCard: null
-    };
-    this._handlerCardClick = this._handlerCardClick.bind(this);
   }
 
   render() {
@@ -17,20 +15,11 @@ class Offers extends PureComponent {
       <React.Fragment>
         {
           this.props.offers.map((offerData) =>
-            <Card key={offerData.id} offerData={offerData} onHover={this._handlerCardClick.bind(this, offerData.id)}/>
+            <Card key={offerData.id} offerData={offerData} onHover={mapDispatchToProps.setActiveOffer(offerData.id)}/>
           )
         }
       </React.Fragment>
     );
-  }
-
-  _handlerCardClick(id) {
-    this.setState({
-      activeCard: id,
-    });
-    if (this.props.onHover) {
-      this.props.onHover();
-    }
   }
 }
 
@@ -39,4 +28,11 @@ Offers.propTypes = {
   onHover: PropTypes.func
 };
 
-export default Offers;
+const mapDispatchToProps = (dispatch) => ({
+  setActiveOffer(value) {
+    dispatch(ActionTypes.SET_ACTIVE_OFFER({payload: value}))
+  },
+});
+
+export {Offers};
+export default connect(mapDispatchToProps)(Offers);
