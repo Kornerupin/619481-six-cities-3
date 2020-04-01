@@ -12,16 +12,8 @@ class Main extends PureComponent {
     this.offers = props.offers;
     this.towns = props.towns;
     this.onHover = props.onHover;
+    this.setTown = props.setTown;
     this.currentTown = props.currentTown;
-    this.currentOffers = [];
-
-    if(this.currentTown >= this.towns.length || this.currentTown < 0)
-      this.currentTown = 0;
-
-    for (let i = 0; i < this.offers.length; i++) {
-      if(this.offers[i].townId === this.towns[this.currentTown].id)
-        this.currentOffers.push(this.offers[i]);
-    }
   }
 
   render() {
@@ -72,32 +64,32 @@ class Main extends PureComponent {
             <section className="locations container">
               <ul className="locations__list tabs__list">
                 <li className="locations__item">
-                  <a className="locations__item-link tabs__item" href="#">
+                  <a className="locations__item-link tabs__item" href="#" onClick={() => this.setTown(1)} >
                     <span>Paris</span>
                   </a>
                 </li>
                 <li className="locations__item">
-                  <a className="locations__item-link tabs__item" href="#">
+                  <a className="locations__item-link tabs__item" href="#" onClick={() => this.setTown(2)} >
                     <span>Cologne</span>
                   </a>
                 </li>
                 <li className="locations__item">
-                  <a className="locations__item-link tabs__item" href="#">
+                  <a className="locations__item-link tabs__item" href="#" onClick={() => this.setTown(3)}>
                     <span>Brussels</span>
                   </a>
                 </li>
                 <li className="locations__item">
-                  <a className="locations__item-link tabs__item tabs__item--active">
+                  <a className="locations__item-link tabs__item tabs__item--active" onClick={() => this.setTown(0)}>
                     <span>Amsterdam</span>
                   </a>
                 </li>
                 <li className="locations__item">
-                  <a className="locations__item-link tabs__item" href="#">
+                  <a className="locations__item-link tabs__item" href="#" onClick={() => this.setTown(4)}>
                     <span>Hamburg</span>
                   </a>
                 </li>
                 <li className="locations__item">
-                  <a className="locations__item-link tabs__item" href="#">
+                  <a className="locations__item-link tabs__item" href="#" onClick={() => this.setTown(5)}>
                     <span>Dusseldorf</span>
                   </a>
                 </li>
@@ -108,7 +100,7 @@ class Main extends PureComponent {
             <div className="cities__places-container container">
               <section className="cities__places places">
                 <h2 className="visually-hidden">Places</h2>
-                <b className="places__found">{this.currentOffers.length} places to stay in {this.towns[this.currentTown].name}</b>
+                <b className="places__found">{this.offers.length} places to stay in {this.towns[this.currentTown].name}</b>
                 <form className="places__sorting" action="#" method="get">
                   <span className="places__sorting-caption">Sort by</span>
                   <span className="places__sorting-type" tabIndex="0">
@@ -126,12 +118,14 @@ class Main extends PureComponent {
                 </form>
                 <div className="cities__places-list places__list tabs__content">
 
-                  <Offers offers={this.currentOffers} onHover={this.onHover} />
+                  {console.log('yes')}
+                  {console.log(this.offers)}
+                  <Offers offers={this.offers} onHover={this.onHover} />
 
                 </div>
               </section>
               <div className="cities__right-section">
-                <Map offers={this.currentOffers} town={this.towns[this.currentTown]} />
+                <Map offers={this.offers} town={this.towns[this.currentTown]} />
               </div>
             </div>
           </div>

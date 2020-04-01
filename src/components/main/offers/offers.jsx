@@ -8,6 +8,9 @@ import {connect} from "react-redux";
 class Offers extends PureComponent {
   constructor(props) {
     super(props);
+    console.log('no');
+    console.log(props.offers);
+    console.log('no2');
   }
 
   render() {
@@ -15,7 +18,7 @@ class Offers extends PureComponent {
       <React.Fragment>
         {
           this.props.offers.map((offerData) =>
-            <Card key={offerData.id} offerData={offerData} onHover={mapDispatchToProps.setActiveOffer(offerData.id)}/>
+            <Card key={offerData.id} offerData={offerData} onHover={this.props.setActiveOffer}/>
           )
         }
       </React.Fragment>
@@ -30,9 +33,9 @@ Offers.propTypes = {
 
 const mapDispatchToProps = (dispatch) => ({
   setActiveOffer(value) {
-    dispatch(ActionTypes.SET_ACTIVE_OFFER({payload: value}))
+    dispatch({type: ActionTypes.SET_ACTIVE_OFFER, payload: value});
   },
 });
 
 export {Offers};
-export default connect(mapDispatchToProps)(Offers);
+export default connect(null, mapDispatchToProps)(Offers);

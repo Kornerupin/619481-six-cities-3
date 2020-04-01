@@ -6,10 +6,11 @@ import {town} from "../../propTypes/town";
 import {connect} from "react-redux";
 import {ActionTypes} from "../../reducer";
 
-const App = ({offers, towns, currentTown}) => {
+const App = ({offers, towns, currentTown, setTown}) => {
   return <Main
     offers={offers}
     towns={towns}
+    setTown={setTown}
     currentTown={currentTown}
   />;
 };
@@ -26,10 +27,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   setTown(value) {
-    dispatch(ActionTypes.SET_TOWN({payload: value}));
-  },
-  getOffersByTown(town) {
-    dispatch(ActionTypes.GET_OFFERS_BY_TOWN({payload: town}));
+    dispatch({type: ActionTypes.SET_TOWN, payload: value});
   },
 });
 
