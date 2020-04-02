@@ -2,6 +2,8 @@ import React, {createRef, PureComponent} from "react";
 import PropTypes from "prop-types";
 import leaflet from "leaflet";
 import {town} from "../../propTypes/town";
+import {connect} from "react-redux";
+import {ActionTypes} from "../../reducer";
 
 const ICONS = {
   notActive: leaflet.icon({
@@ -15,46 +17,68 @@ const ICONS = {
 };
 
 class CustomMap extends PureComponent {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this._map = null;
     this._mapRef = createRef();
-    this._markers = leaflet.layerGroup();
-    this._currentMarkers = leaflet.layerGroup();
+    this._markers = {};
+    this._activeMarker = this.props.activeOffer;
+    this._currentTown = this.props.currentTown;
   }
 
-  _setMarkers(coords, activeCoords) {
-    this._markers.clearLayers();
+  _setMarkers() {
+    this._markers = {};
 
-    coords.map((coord) => {
-      leaflet.marker(coord, {
-        icon: ICONS.notActive,
-      }).addTo(this._markers)
+    this.props.currentOffers.map((offer) => {
+      this._createMarkerByOffer(offer);
+      this._markers[offer.id].isActive = false;
     });
 
-    if (activeCoords.length > 0) {
-      activeCoords.map((coord) => {
-        leaflet.marker(coord, {
-          icon: ICONS.active,
-        }).addTo(this._currentMarkers)
-      })
+    console.log(this._markers);
+    this._clearMarkers();
+  }
+
+  _createMarkerByOffer(offer, isActive = false) {
+    this._markers[offer.id] = leaflet.marker(offer.coords, {
+      icon: isActive ? ICONS.active : ICONS.notActive,
+      title: `Test`,
+    }).addTo(this._map);
+  }
+
+  _clearMarkers() {
+    for (let marker in this._markers) {
+      if(this._markers[marker].isActive === true) {
+        leaflet.marker(this._markers[marker]._latlng, {icon: ICONS.notActive}).addTo(this._map);
+      }
+    }
+  }
+
+  _setActiveMarker() {
+    this._clearMarkers();
+
+    this._activeMarker = this.props.activeOffer;
+
+    if (this.props.activeOffer && this._markers[this.props.activeOffer]) {
+      leaflet.marker(this._markers[this.props.activeOffer]._latlng, {icon: ICONS.active}).addTo(this._map);
+      this._markers[this.props.activeOffer].isActive = true;
+      // console.log(this._markers[this.props.activeOffer]);
+      console.log(this._markers[this.props.activeOffer].options.icon.options.iconUrl);
     }
   }
 
   componentDidMount() {
     if (this._mapRef.current) {
-
-      this.map = leaflet.map(this._mapRef.current, {
-        center: this.props.town.center,
-        zoom: this.props.town.zoom,
+      this._map = leaflet.map(this._mapRef.current, {
+        center: this.props.currentTown.center,
+        zoom: this.props.currentTown.zoom,
         zoomControl: false,
         marker: true
       });
 
       this._map.setView(
-        this.props.town.center,
-        this.props.town.zoom
+        this.props.currentTown.center,
+        this.props.currentTown.zoom
       );
 
       leaflet
@@ -63,41 +87,32 @@ class CustomMap extends PureComponent {
         })
         .addTo(this._map);
 
-      this._setMarkers(this.props.coords, this.props.activeCoords);
+      this._setMarkers();
 
-      this._markers.addTo(this._map);
-      this._currentMarkers.addTo(this._map);
+      // this._markers.addTo(this._map);
     }
   }
 
   componentDidUpdate() {
-    console.log(this.props);
+    if (this.props.activeOffer !== this._activeMarker) {
+      this._setActiveMarker();
+      console.log(this.props.activeOffer);
+    }
 
-    // this.map = leaflet.map;
-    // const pins = [];
-    //
-    // this.map = leaflet.map(this.mapRef.current, {
-    //   center: this.props.town.center,
-    //   zoom: this.props.town.zoom,
-    //   zoomControl: false,
-    //   marker: true
-    // });
-    // this.props.offers.map((offer) => {
-    //   pins.push(offer.coords);
-    //   leaflet
-    //     .marker(offer.coords, {icon})
-    //     .addTo(this.map);
-    // });
-    // this.map.setView(this.props.town.center, this.props.town.zoom);
-    // leaflet
-    //   .tileLayer(`https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png`, {
-    //     attribution: `&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>`
-    //   })
-    //   .addTo(this.map);
+    if (this.props.currentTown !== this._currentTown) {
+      this._map.setView(
+        this.props.currentTown.center,
+        this.props.currentTown.zoom
+      );
+
+      this._setMarkers();
+
+      this._currentTown = this.props.currentTown;
+    }
   }
 
   render() {
-    return <section className="cities__map map" id="map" ref={this.mapRef}></section>;
+    return <section className="cities__map map" id="map" ref={this._mapRef}></section>;
   }
 }
 
@@ -106,4 +121,18 @@ CustomMap.propTypes = {
   currentTown: town,
 };
 
-export default CustomMap;
+const mapStateToProps = (state) => ({
+  activeOffer: state.activeOffer,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  setActiveOffer(value) {
+    dispatch({type: ActionTypes.SET_ACTIVE_OFFER, payload: value});
+  },
+  resetActiveOffer() {
+    dispatch({type: ActionTypes.RESET_ACTIVE_OFFER});
+  },
+});
+
+export {CustomMap};
+export default connect(mapStateToProps, mapDispatchToProps)(CustomMap);

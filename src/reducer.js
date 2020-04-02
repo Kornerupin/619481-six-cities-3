@@ -3,19 +3,19 @@ import offers from "./mocks/offers";
 import towns from "./mocks/towns";
 
 const initialState = {
-  currentTown: 1,
+  currentTown: null,
   activeOffer: null,
   currentOffers: [],
 };
 
 const ActionTypes = {
-  INIT: `@@init`,
+  INIT: `@@INIT`,
   SET_TOWN: `SET_TOWN`,
   SET_ACTIVE_OFFER: `SET_ACTIVE_OFFER`,
   RESET_ACTIVE_OFFER: `RESET_ACTIVE_OFFER`,
 };
 
-const actionSetTown = (state, payload) => {
+const actionSetTown = (state, payload = 0) => {
   const tempOffers = [];
   if(payload >= towns.length || payload < 0)
     payload = 0;
@@ -37,7 +37,7 @@ const reducer = (state = initialState, action) => {
 
     case ActionTypes.INIT:
     case ActionTypes.SET_TOWN:
-      actionSetTown(state, action.payload);
+      return actionSetTown(state, action.payload);
 
     case ActionTypes.SET_ACTIVE_OFFER:
       return extend(state, {

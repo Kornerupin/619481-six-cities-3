@@ -108,13 +108,18 @@ class Main extends PureComponent {
                 </form>
                 <div className="cities__places-list places__list tabs__content">
 
-                  <Offers currentOffers={this.props.currentOffers} onHover={this.onHover} />
+                  <Offers
+                    currentOffers={this.props.currentOffers}
+                  />
 
                 </div>
               </section>
               <div className="cities__right-section">
 
-                <Map currentOffers={this.props.currentOffers} town={towns[this.props.currentTown]} />
+                <Map
+                  currentOffers={this.props.currentOffers}
+                  currentTown={towns[this.props.currentTown]}
+                />
 
               </div>
             </div>
@@ -128,7 +133,6 @@ class Main extends PureComponent {
 Main.propTypes = {
   currentOffers: PropTypes.arrayOf(card).isRequired,
   currentTown: PropTypes.number.isRequired,
-  onHover: PropTypes.func,
 };
 
 export default Main;

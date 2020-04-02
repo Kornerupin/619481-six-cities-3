@@ -11,7 +11,12 @@ class Offers extends PureComponent {
       <React.Fragment>
         {
           this.props.currentOffers.map((offerData) =>
-            <Card key={offerData.id} offerData={offerData} onHover={this.props.setActiveOffer}/>
+            <Card
+              key={offerData.id}
+              offerData={offerData}
+              onEnter={this.props.setActiveOffer}
+              onLeave={this.props.resetActiveOffer}
+            />
           )
         }
       </React.Fragment>
@@ -21,12 +26,16 @@ class Offers extends PureComponent {
 
 Offers.propTypes = {
   currentOffers: PropTypes.arrayOf(card).isRequired,
-  onHover: PropTypes.func
+  onEnter: PropTypes.func,
+  onLeave: PropTypes.func,
 };
 
 const mapDispatchToProps = (dispatch) => ({
   setActiveOffer(value) {
     dispatch({type: ActionTypes.SET_ACTIVE_OFFER, payload: value});
+  },
+  resetActiveOffer() {
+    dispatch({type: ActionTypes.RESET_ACTIVE_OFFER});
   },
 });
 

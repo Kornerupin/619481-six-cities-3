@@ -2,8 +2,12 @@ import React from "react";
 import PropTypes from "prop-types";
 import {card} from "../../../propTypes/card";
 
-const Card = ({offerData, onHover}) => {
-  return (<article className="cities__place-card place-card" onMouseEnter={() => onHover(offerData.id)}>
+const Card = ({offerData, onLeave, onEnter}) => {
+  return (<article
+      className="cities__place-card place-card"
+      onMouseEnter={() => onEnter(offerData.id)}
+      onMouseLeave={() => onLeave(offerData.id)}
+    >
     {
       offerData.mark ? (
         <div className="place-card__mark">
@@ -13,7 +17,8 @@ const Card = ({offerData, onHover}) => {
     }
     <div className="cities__image-wrapper place-card__image-wrapper">
       <a href={offerData.link}>
-        <img className="place-card__image" src={`img/` + offerData.img.imgLink} width="260" height="200"
+        <img className="place-card__image"
+           src={`img/` + offerData.img.imgLink} width="260" height="200"
           alt={offerData.img.imgAlt}/>
       </a>
     </div>
@@ -46,7 +51,8 @@ const Card = ({offerData, onHover}) => {
 
 Card.propTypes = {
   offerData: card,
-  onHover: PropTypes.func,
+  onEnter: PropTypes.func,
+  onLeave: PropTypes.func,
   number: PropTypes.number
 };
 
