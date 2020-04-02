@@ -6,10 +6,6 @@ import {ActionTypes} from "../../../reducer";
 import {connect} from "react-redux";
 
 class Offers extends PureComponent {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     return (
       <React.Fragment>

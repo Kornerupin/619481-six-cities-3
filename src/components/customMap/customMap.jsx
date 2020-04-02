@@ -102,8 +102,8 @@ class CustomMap extends PureComponent {
 }
 
 CustomMap.propTypes = {
-  offers: PropTypes.array,
-  town: town,
+  currentOffers: PropTypes.array,
+  currentTown: town,
 };
 
 export default CustomMap;

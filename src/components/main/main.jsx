@@ -6,12 +6,6 @@ import {default as Map} from "../customMap/customMap";
 import towns from "../../mocks/towns";
 
 class Main extends PureComponent {
-  constructor(props) {
-    super();
-
-    props.setTown(props.currentTown);
-  }
-
   render() {
     return <React.Fragment>
       <div style={{display: `none`}}>
