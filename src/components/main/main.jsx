@@ -3,17 +3,13 @@ import Offers from "./offers/offers";
 import PropTypes from "prop-types";
 import {card} from "../../propTypes/card";
 import {default as Map} from "../customMap/customMap";
-import {town} from "../../propTypes/town";
+import towns from "../../mocks/towns";
 
 class Main extends PureComponent {
   constructor(props) {
     super();
 
-    this.offers = props.offers;
-    this.towns = props.towns;
-    this.onHover = props.onHover;
-    this.setTown = props.setTown;
-    this.currentTown = props.currentTown;
+    props.setTown(props.currentTown);
   }
 
   render() {
@@ -64,32 +60,32 @@ class Main extends PureComponent {
             <section className="locations container">
               <ul className="locations__list tabs__list">
                 <li className="locations__item">
-                  <a className="locations__item-link tabs__item" href="#" onClick={() => this.setTown(1)} >
+                  <a className="locations__item-link tabs__item" href="#" onClick={() => this.props.setTown(1)} >
                     <span>Paris</span>
                   </a>
                 </li>
                 <li className="locations__item">
-                  <a className="locations__item-link tabs__item" href="#" onClick={() => this.setTown(2)} >
+                  <a className="locations__item-link tabs__item" href="#" onClick={() => this.props.setTown(2)} >
                     <span>Cologne</span>
                   </a>
                 </li>
                 <li className="locations__item">
-                  <a className="locations__item-link tabs__item" href="#" onClick={() => this.setTown(3)}>
+                  <a className="locations__item-link tabs__item" href="#" onClick={() => this.props.setTown(3)}>
                     <span>Brussels</span>
                   </a>
                 </li>
                 <li className="locations__item">
-                  <a className="locations__item-link tabs__item tabs__item--active" onClick={() => this.setTown(0)}>
+                  <a className="locations__item-link tabs__item tabs__item--active" onClick={() => this.props.setTown(0)}>
                     <span>Amsterdam</span>
                   </a>
                 </li>
                 <li className="locations__item">
-                  <a className="locations__item-link tabs__item" href="#" onClick={() => this.setTown(4)}>
+                  <a className="locations__item-link tabs__item" href="#" onClick={() => this.props.setTown(4)}>
                     <span>Hamburg</span>
                   </a>
                 </li>
                 <li className="locations__item">
-                  <a className="locations__item-link tabs__item" href="#" onClick={() => this.setTown(5)}>
+                  <a className="locations__item-link tabs__item" href="#" onClick={() => this.props.setTown(5)}>
                     <span>Dusseldorf</span>
                   </a>
                 </li>
@@ -100,7 +96,7 @@ class Main extends PureComponent {
             <div className="cities__places-container container">
               <section className="cities__places places">
                 <h2 className="visually-hidden">Places</h2>
-                <b className="places__found">{this.offers.length} places to stay in {this.towns[this.currentTown].name}</b>
+                <b className="places__found">{this.props.currentOffers.length} places to stay in {towns[this.props.currentTown].name}</b>
                 <form className="places__sorting" action="#" method="get">
                   <span className="places__sorting-caption">Sort by</span>
                   <span className="places__sorting-type" tabIndex="0">
@@ -118,14 +114,14 @@ class Main extends PureComponent {
                 </form>
                 <div className="cities__places-list places__list tabs__content">
 
-                  {console.log('yes')}
-                  {console.log(this.offers)}
-                  <Offers offers={this.offers} onHover={this.onHover} />
+                  <Offers currentOffers={this.props.currentOffers} onHover={this.onHover} />
 
                 </div>
               </section>
               <div className="cities__right-section">
-                <Map offers={this.offers} town={this.towns[this.currentTown]} />
+
+                <Map currentOffers={this.props.currentOffers} town={towns[this.props.currentTown]} />
+
               </div>
             </div>
           </div>
@@ -136,8 +132,7 @@ class Main extends PureComponent {
 }
 
 Main.propTypes = {
-  offers: PropTypes.arrayOf(card).isRequired,
-  towns: PropTypes.arrayOf(town).isRequired,
+  currentOffers: PropTypes.arrayOf(card).isRequired,
   currentTown: PropTypes.number.isRequired,
   onHover: PropTypes.func,
 };

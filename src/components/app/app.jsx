@@ -2,27 +2,25 @@ import React from "react";
 import Main from "../main/main";
 import PropTypes from "prop-types";
 import {card} from "../../propTypes/card";
-import {town} from "../../propTypes/town";
 import {connect} from "react-redux";
 import {ActionTypes} from "../../reducer";
 
-const App = ({offers, towns, currentTown, setTown}) => {
+const App = ({currentOffers, currentTown, setTown}) => {
+
   return <Main
-    offers={offers}
-    towns={towns}
-    setTown={setTown}
+    currentOffers={currentOffers}
     currentTown={currentTown}
+    setTown={setTown}
   />;
 };
 
 App.propTypes = {
-  offers: PropTypes.arrayOf(card).isRequired,
-  towns: PropTypes.arrayOf(town).isRequired,
+  currentOffers: PropTypes.arrayOf(card).isRequired,
 };
 
 const mapStateToProps = (state) => ({
   currentTown: state.currentTown,
-  offers: state.offers,
+  currentOffers: state.currentOffers,
 });
 
 const mapDispatchToProps = (dispatch) => ({

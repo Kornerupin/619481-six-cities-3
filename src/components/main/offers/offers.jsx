@@ -8,16 +8,13 @@ import {connect} from "react-redux";
 class Offers extends PureComponent {
   constructor(props) {
     super(props);
-    console.log('no');
-    console.log(props.offers);
-    console.log('no2');
   }
 
   render() {
     return (
       <React.Fragment>
         {
-          this.props.offers.map((offerData) =>
+          this.props.currentOffers.map((offerData) =>
             <Card key={offerData.id} offerData={offerData} onHover={this.props.setActiveOffer}/>
           )
         }
@@ -27,7 +24,7 @@ class Offers extends PureComponent {
 }
 
 Offers.propTypes = {
-  offers: PropTypes.arrayOf(card).isRequired,
+  currentOffers: PropTypes.arrayOf(card).isRequired,
   onHover: PropTypes.func
 };
 
