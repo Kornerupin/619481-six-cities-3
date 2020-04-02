@@ -6,14 +6,14 @@ import {connect} from "react-redux";
 import {ActionTypes} from "../../reducer";
 
 const ICONS = {
-  notActive: leaflet.icon({
+  notActive: {
     iconUrl: `img/pin.svg`,
     iconSize: [30, 30]
-  }),
-  active: leaflet.icon({
+  },
+  active: {
     iconUrl: `img/pin-active.svg`,
     iconSize: [30, 30]
-  }),
+  },
 };
 
 class CustomMap extends PureComponent {
@@ -35,35 +35,49 @@ class CustomMap extends PureComponent {
       this._markers[offer.id].isActive = false;
     });
 
-    console.log(this._markers);
-    this._clearMarkers();
+    this._setNotActiveMarkers();
   }
 
   _createMarkerByOffer(offer, isActive = false) {
     this._markers[offer.id] = leaflet.marker(offer.coords, {
-      icon: isActive ? ICONS.active : ICONS.notActive,
+      icon: leaflet.icon({
+        iconUrl: isActive ? ICONS.active.iconUrl : ICONS.notActive.iconUrl,
+        iconSize: isActive ? ICONS.active.iconSize : ICONS.notActive.iconSize,
+      }),
       title: `Test`,
     }).addTo(this._map);
+    this._markers[offer.id].addEventListener(`mouseover`, () => {
+      this.props.setActiveOffer(offer.id);
+    });
+    this._markers[offer.id].addEventListener(`mouseout`, () => {
+      this.props.resetActiveOffer();
+    });
   }
 
-  _clearMarkers() {
+  _setNotActiveMarkers() {
     for (let marker in this._markers) {
       if(this._markers[marker].isActive === true) {
-        leaflet.marker(this._markers[marker]._latlng, {icon: ICONS.notActive}).addTo(this._map);
+        this._markers[marker]._icon.setAttribute(`src`, ICONS.notActive.iconUrl);
+
+        this._markers[marker].isActive = false;
       }
     }
   }
 
   _setActiveMarker() {
-    this._clearMarkers();
+    this._setNotActiveMarkers();
 
     this._activeMarker = this.props.activeOffer;
 
     if (this.props.activeOffer && this._markers[this.props.activeOffer]) {
-      leaflet.marker(this._markers[this.props.activeOffer]._latlng, {icon: ICONS.active}).addTo(this._map);
+      this._markers[this.props.activeOffer]._icon.setAttribute(`src`, ICONS.active.iconUrl);
       this._markers[this.props.activeOffer].isActive = true;
-      // console.log(this._markers[this.props.activeOffer]);
-      console.log(this._markers[this.props.activeOffer].options.icon.options.iconUrl);
+    }
+  }
+
+  _clearMarkers() {
+    for (let marker in this._markers) {
+      this._map.removeLayer(this._markers[marker]);
     }
   }
 
@@ -88,18 +102,17 @@ class CustomMap extends PureComponent {
         .addTo(this._map);
 
       this._setMarkers();
-
-      // this._markers.addTo(this._map);
     }
   }
 
   componentDidUpdate() {
     if (this.props.activeOffer !== this._activeMarker) {
       this._setActiveMarker();
-      console.log(this.props.activeOffer);
     }
 
     if (this.props.currentTown !== this._currentTown) {
+      this._clearMarkers();
+
       this._map.setView(
         this.props.currentTown.center,
         this.props.currentTown.zoom
