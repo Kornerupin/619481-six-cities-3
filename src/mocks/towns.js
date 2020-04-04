@@ -32,7 +32,7 @@ export default [
   {
     id: 6129,
     name: `Dusseldorf`,
-    zoom: 12,
+    zoom: 13,
     center: [51.230, 6.77],
   }
 ];

@@ -2,6 +2,10 @@ import React from "react";
 import Enzyme, {mount} from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 import Main from "./main";
+import configureStore from "redux-mock-store";
+import {Provider} from "react-redux";
+
+const mockStore = configureStore([]);
 
 Enzyme.configure({
   adapter: new Adapter(),
@@ -45,9 +49,21 @@ it(`Should article be hovered`, () => {
       type: `Apartment`,
     }
   ];
+  const store = configureStore({
+    currentOffers: mockStore,
+    currentTown: 0,
+    activeOffer: null,
+    sortType: `SORT_POPULAR`,
+  });
 
   const main = mount(
-      <Main offers={testData} onHover={(handler)}/>
+      <Provider store={store}>
+        <Main
+          currentOffers={testData}
+          currentTown={0}
+          onEnter={(handler)}
+        />
+      </Provider>
   );
 
   main.find(`.place-card`).forEach((node) => {

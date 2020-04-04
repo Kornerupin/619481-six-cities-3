@@ -5,6 +5,6 @@ export const town = PropTypes.exact({
   name: PropTypes.string.isRequired,
   zoom: PropTypes.number.isRequired,
   center: PropTypes.arrayOf(
-    PropTypes.number.isRequired
+      PropTypes.number.isRequired
   )
 });

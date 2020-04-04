@@ -12,6 +12,7 @@ it(`Should state get current data if article hovered`, () => {
 
   const testData = {
     id: 34,
+    townId: 5859,
     mark: `Premium`,
     coords: [52.3909553943508, 4.85309666406198],
     img: {
@@ -22,6 +23,7 @@ it(`Should state get current data if article hovered`, () => {
     price: {
       priceValue: `€120`,
       priceText: `/ night`,
+      priceType: `€`,
     },
     rating: 4,
     title: `Beautiful & luxurious apartment at great location`,
@@ -29,10 +31,10 @@ it(`Should state get current data if article hovered`, () => {
   };
 
   const cardNode = mount(
-      <Card offerData={testData} onHover={handler} />
+      <Card offerData={testData} onEnter={handler} />
   );
 
-  cardNode.simulate(`mouseover`);
+  cardNode.simulate(`mouseenter`);
 
   expect(handler.mock.calls[0][0]).toBe(testData.id);
   expect(handler.mock.calls.length).toBe(1);

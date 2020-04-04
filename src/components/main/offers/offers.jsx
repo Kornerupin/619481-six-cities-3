@@ -1,31 +1,37 @@
 import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
-import Card from "../card/card";
+import Card from "./card/card";
 import {card} from "../../../propTypes/card";
 import {ActionTypes} from "../../../reducer";
 import {connect} from "react-redux";
 
 class Offers extends PureComponent {
   render() {
-    return (
-      <React.Fragment>
-        {
-          this.props.currentOffers.map((offerData) =>
-            <Card
-              key={offerData.id}
-              offerData={offerData}
-              onEnter={this.props.setActiveOffer}
-              onLeave={this.props.resetActiveOffer}
-            />
-          )
-        }
-      </React.Fragment>
-    );
+    if (this.props.currentOffers.length > 0) {
+      return (
+        <React.Fragment>
+          {
+            this.props.currentOffers.map((offerData) =>
+              <Card
+                key={offerData.id}
+                offerData={offerData}
+                onEnter={this.props.setActiveOffer}
+                onLeave={this.props.resetActiveOffer}
+              />
+            )
+          }
+        </React.Fragment>
+      );
+    } else {
+      return null;
+    }
   }
 }
 
 Offers.propTypes = {
   currentOffers: PropTypes.arrayOf(card).isRequired,
+  setActiveOffer: PropTypes.func,
+  resetActiveOffer: PropTypes.func,
   onEnter: PropTypes.func,
   onLeave: PropTypes.func,
 };

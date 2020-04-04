@@ -1,13 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
-import {card} from "../../../propTypes/card";
+import {card} from "../../../../propTypes/card";
 
 const Card = ({offerData, onLeave, onEnter}) => {
-  return (<article
-      className="cities__place-card place-card"
-      onMouseEnter={() => onEnter(offerData.id)}
-      onMouseLeave={() => onLeave(offerData.id)}
-    >
+  return (<article className="cities__place-card place-card" onMouseEnter={() => onEnter(offerData.id)} onMouseLeave={() => onLeave(offerData.id)}>
     {
       offerData.mark ? (
         <div className="place-card__mark">
@@ -18,15 +14,15 @@ const Card = ({offerData, onLeave, onEnter}) => {
     <div className="cities__image-wrapper place-card__image-wrapper">
       <a href={offerData.link}>
         <img className="place-card__image"
-           src={`img/` + offerData.img.imgLink} width="260" height="200"
+          src={`img/` + offerData.img.imgLink} width="260" height="200"
           alt={offerData.img.imgAlt}/>
       </a>
     </div>
     <div className="place-card__info">
       <div className="place-card__price-wrapper">
         <div className="place-card__price">
-          <b className="place-card__price-value">{offerData.price.priceValue}</b>
-          <span className="place-card__price-text">{offerData.price.priceText}</span>
+          <b className="place-card__price-value">{offerData.price.priceType}{offerData.price.priceValue}</b>
+          <span className="place-card__price-text">/ {offerData.price.priceText}</span>
         </div>
         <button className="place-card__bookmark-button button" type="button">
           <svg className="place-card__bookmark-icon" width="18" height="19">
@@ -50,10 +46,9 @@ const Card = ({offerData, onLeave, onEnter}) => {
 };
 
 Card.propTypes = {
-  offerData: card,
+  offerData: card.isRequired,
   onEnter: PropTypes.func,
   onLeave: PropTypes.func,
-  number: PropTypes.number
 };
 
 

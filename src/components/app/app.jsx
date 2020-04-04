@@ -3,7 +3,6 @@ import Main from "../main/main";
 import PropTypes from "prop-types";
 import {card} from "../../propTypes/card";
 import {connect} from "react-redux";
-import {ActionTypes} from "../../reducer";
 
 const App = ({currentOffers, currentTown, setTown}) => {
 
@@ -15,7 +14,9 @@ const App = ({currentOffers, currentTown, setTown}) => {
 };
 
 App.propTypes = {
+  currentTown: PropTypes.number.isRequired,
   currentOffers: PropTypes.arrayOf(card).isRequired,
+  setTown: PropTypes.func,
 };
 
 const mapStateToProps = (state) => ({
@@ -23,11 +24,5 @@ const mapStateToProps = (state) => ({
   currentOffers: state.currentOffers,
 });
 
-const mapDispatchToProps = (dispatch) => ({
-  setTown(value) {
-    dispatch({type: ActionTypes.SET_TOWN, payload: value});
-  },
-});
-
 export {App};
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect(mapStateToProps, null)(App);

@@ -1,9 +1,10 @@
 import React, {createRef, PureComponent} from "react";
 import PropTypes from "prop-types";
 import leaflet from "leaflet";
-import {town} from "../../propTypes/town";
+import {town} from "../../../propTypes/town";
+import {card} from "../../../propTypes/card";
 import {connect} from "react-redux";
-import {ActionTypes} from "../../reducer";
+import {ActionTypes} from "../../../reducer";
 
 const ICONS = {
   notActive: {
@@ -56,7 +57,7 @@ class CustomMap extends PureComponent {
 
   _setNotActiveMarkers() {
     for (let marker in this._markers) {
-      if(this._markers[marker].isActive === true) {
+      if (this._markers[marker].isActive === true) {
         this._markers[marker]._icon.setAttribute(`src`, ICONS.notActive.iconUrl);
 
         this._markers[marker].isActive = false;
@@ -77,7 +78,9 @@ class CustomMap extends PureComponent {
 
   _clearMarkers() {
     for (let marker in this._markers) {
-      this._map.removeLayer(this._markers[marker]);
+      if (this && this._map && marker) {
+        this._map.removeLayer(this._markers[marker]);
+      }
     }
   }
 
@@ -91,8 +94,8 @@ class CustomMap extends PureComponent {
       });
 
       this._map.setView(
-        this.props.currentTown.center,
-        this.props.currentTown.zoom
+          this.props.currentTown.center,
+          this.props.currentTown.zoom
       );
 
       leaflet
@@ -114,8 +117,8 @@ class CustomMap extends PureComponent {
       this._clearMarkers();
 
       this._map.setView(
-        this.props.currentTown.center,
-        this.props.currentTown.zoom
+          this.props.currentTown.center,
+          this.props.currentTown.zoom
       );
 
       this._setMarkers();
@@ -130,8 +133,11 @@ class CustomMap extends PureComponent {
 }
 
 CustomMap.propTypes = {
-  currentOffers: PropTypes.array,
-  currentTown: town,
+  currentOffers: PropTypes.arrayOf(card).isRequired,
+  activeOffer: PropTypes.number,
+  currentTown: town.isRequired,
+  setActiveOffer: PropTypes.func,
+  resetActiveOffer: PropTypes.func,
 };
 
 const mapStateToProps = (state) => ({

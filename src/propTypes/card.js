@@ -13,6 +13,7 @@ export const card = PropTypes.exact({
   price: PropTypes.exact({
     priceValue: PropTypes.string.isRequired,
     priceText: PropTypes.string.isRequired,
+    priceType: PropTypes.string.isRequired,
   }),
   rating: PropTypes.oneOf([0, 1, 2, 3, 4, 5]),
   title: PropTypes.string.isRequired,
