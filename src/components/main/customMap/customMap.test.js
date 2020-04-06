@@ -27,22 +27,27 @@ const testData = [
     type: `Apartment`,
   }
 ];
+const testTown = {
+  id: 3678,
+  name: `Cologne`,
+  zoom: 12,
+  center: [50.938, 6.965],
+};
 
 describe(`<CustomMap /> component tests`, () => {
 
   it(`Render test`, () => {
     const store = mockStore({
       currentOffers: testData,
-      currentTown: 0,
-      activeOffer: null,
+      currentTown: testTown,
     });
 
     const tree = renderer.
       create(
           <Provider store={store}>
             <CustomMap
-              offers={testData}
-              activeOffer={null}
+              currentOffers={testData}
+              currentTown={testTown}
             />
           </Provider>
       ).parseJSON;

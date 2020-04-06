@@ -51,28 +51,37 @@ class Sort extends PureComponent {
   }
 
   setSortListToggle() {
-    this.domSortList.classList.toggle(`places__options--opened`);
+    if (this.domSortList) {
+      this.domSortList.classList.toggle(`places__options--opened`);
+    }
   }
 
   setSortItemActive(number) {
-    // Удаляем активный элемент
-    for (let i = 0; i < this.domSortItems.length; i++) {
-      this.domSortItems[i].classList.remove(`places__option--active`);
-    }
-    // Ставим активный элемент - текущий пункт
-    this.domSortItems[number].classList.add(`places__option--active`);
+    if (this.domSortItems[0]) {
+      // Удаляем активный элемент
+      for (let i = 0; i < this.domSortItems.length; i++) {
+        this.domSortItems[i].classList.remove(`places__option--active`);
+      }
+      // Ставим активный элемент - текущий пункт
+      this.domSortItems[number].classList.add(`places__option--active`);
 
-    switch (number) {
-      case 0:
-        this.props.sortByPopular(); break;
-      case 1:
-        this.props.sortLowToHigh(); break;
-      case 2:
-        this.props.sortHighToLow(); break;
-      case 3:
-        this.props.sortTopRated(); break;
-      default:
-        this.props.sortByPopular(); break;
+      switch (number) {
+        case 0:
+          this.props.sortByPopular();
+          break;
+        case 1:
+          this.props.sortLowToHigh();
+          break;
+        case 2:
+          this.props.sortHighToLow();
+          break;
+        case 3:
+          this.props.sortTopRated();
+          break;
+        default:
+          this.props.sortByPopular();
+          break;
+      }
     }
   }
 

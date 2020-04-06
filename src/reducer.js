@@ -122,11 +122,16 @@ const reducer = (store = initialStore, action) => {
     case ActionTypes.SET_TOWN:
       return actionSetTown(store, action.payload);
 
-
     case ActionTypes.SET_ACTIVE_OFFER:
-      return extend(store, {
-        activeOffer: action.payload
-      });
+      if (action.payload && action.payload >= 0 || action.payload === null) {
+        return extend(store, {
+          activeOffer: action.payload
+        });
+      } else {
+        return extend(store, {
+          activeOffer: null
+        });
+      }
 
     case ActionTypes.RESET_ACTIVE_OFFER:
       return extend(store, {activeOffer: null});
