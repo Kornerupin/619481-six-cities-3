@@ -1,9 +1,9 @@
 import React from "react";
-import Enzyme, {shallow} from "enzyme";
+import Enzyme, {mount} from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 import configureStore from "redux-mock-store";
 import {Provider} from "react-redux";
-import {Offers} from "./offers";
+import Offers from "./offers";
 
 const mockStore = configureStore([]);
 
@@ -57,7 +57,7 @@ it(`Should card hover will change state`, () => {
     activeOffer: null,
   });
 
-  const offersDom = shallow(
+  const offersDom = mount(
       <Provider store={store}>
         <Offers
           currentOffers={testData}
